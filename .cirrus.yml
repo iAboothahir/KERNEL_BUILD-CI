@@ -1,0 +1,29 @@
+env:
+    CIRRUS_CLONE_DEPTH: 1
+    BUILD_HOSTNAME: "CirrusCI"
+    CIRRUS_WORKING_DIR: "/tmp/ci"
+    ALLOW_MISSING_DEPENDENCIES: "true"
+
+task:
+  name: KERNEL - Asus Zenfone Max Pro M1
+  container:
+    image: dopaemon/bionic
+    cpu: 4
+    memory: 8G
+
+  clone_script:
+    - mkdir -p ~/kernel
+    - cd ~/kernel
+    - git clone -b lineage-17.1 --single-branch --depth="1" https://github.com/LineageOS/android_kernel_asus_sdm660
+    - git clone -b pie-gsi --single-branch --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 aarch64
+    - git clone -b pie-gsi --single-branch --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 arm32
+    - PATH="$HOME/kernel/aarch64/bin:$HOME/kernel/arm32/bin:${PATH}"
+    - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
+    - cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
+   build_script:
+    - cd ~/kernel
+    - export ARCH=arm64
+    - export CROSS_COMPILE=aarch64-linux-android-
+    - export CROSS_COMPILE_ARM32=arm-linux-androideabi-
+    - make O=out X00TD_defconfig -j$(nproc --all)
+    - make O=out -j$(nproc --all)
