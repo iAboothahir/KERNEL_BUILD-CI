@@ -5,6 +5,7 @@ env:
     ALLOW_MISSING_DEPENDENCIES: "true"
 
     TLGTK: "ENCRYPTED[947923cb386537b5b64febb681804ae917eccc691323b69833f38c93107ee7b5be07e91449ddc69542c8d9fa703aebe2]"
+    ZIPNAME: "/home/doraemon/kernel/flashable/zip/Lineage-17.1-kernel.zip"
 
 task:
   name: KERNEL - Asus Zenfone Max Pro M1
@@ -36,4 +37,4 @@ task:
     - cd zip
     - zip -rv9 "Lineage-17.1-kernel.zip" *
   telegram_script:
-    - curl -F document=@"~/kernel/flashable/zip/Lineage-17.1-kernel.zip" https://api.telegram.org/bot$TLGTK/sendDocument?chat_id=-1001398988224
+    - curl -F chat_id=-1001398988224 -F document=@$ZIPNAME -F parse_mode=markdown https://api.telegram.org/bot$TLGTK/sendDocument
