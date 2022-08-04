@@ -36,4 +36,4 @@ task:
     - cd zip
     - zip -rv9 "Lineage-17.1-kernel.zip" *
   telegram_script:
-    - curl -F document=@"~/kernel/zip/Lineage-17.1-kernel.zip" https://api.telegram.org/bot$TLGTK/sendDocument?chat_id=-1001398988224
+    - curl -F document=@"~/kernel/flashable/zip/Lineage-17.1-kernel.zip" https://api.telegram.org/bot$TLGTK/sendDocument?chat_id=-1001398988224
