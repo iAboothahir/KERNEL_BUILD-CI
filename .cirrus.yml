@@ -11,7 +11,7 @@ task:
     cpu: 4
     memory: 8G
 
-  clone_script:
+    clone_script:
     - mkdir -p ~/kernel
     - cd ~/kernel
     - git clone -b lineage-17.1 --single-branch --depth="1" https://github.com/LineageOS/android_kernel_asus_sdm660
@@ -20,7 +20,7 @@ task:
     - PATH="~/kernel/aarch64/bin:~/kernel/arm32/bin:${PATH}"
     - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
     - cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
-   build_script:
+    build_script:
     - cd ~/kernel
     - export ARCH=arm64
     - export CROSS_COMPILE=aarch64-linux-android-
