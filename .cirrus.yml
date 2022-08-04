@@ -21,7 +21,7 @@ task:
     - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
     - cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
   build_script:
-    - cd ~/kernel
+    - cd ~/kernel/android_kernel_asus_sdm660
     - export ARCH=arm64
     - export CROSS_COMPILE=aarch64-linux-android-
     - export CROSS_COMPILE_ARM32=arm-linux-androideabi-
