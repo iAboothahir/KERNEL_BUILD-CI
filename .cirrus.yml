@@ -4,6 +4,8 @@ env:
     CIRRUS_WORKING_DIR: "/tmp/ci"
     ALLOW_MISSING_DEPENDENCIES: "true"
 
+    TLGTK: "ENCRYPTED[947923cb386537b5b64febb681804ae917eccc691323b69833f38c93107ee7b5be07e91449ddc69542c8d9fa703aebe2]"
+
 task:
   name: KERNEL - Asus Zenfone Max Pro M1
   container:
@@ -26,3 +28,12 @@ task:
     - export CROSS_COMPILE_ARM32=/tmp/ci/gcc/arm/bin/arm-linux-androideabi-
     - make O=out X00TD_defconfig
     - make O=out -j$(nproc --all)
+  flashable_script:
+    - mkdir -p ~/kernel/flashable
+    - cd ~/kernel/flashable
+    - git clone -b master --depth="1" https://github.com/iAboothahir/AnyKernel3 zip
+    - cp -r ~/kernel/android_kernel_asus_sdm660/out/arch/arm64/boot/Image.gz-dtb ~/kernel/flashable/zip/
+    - cd zip
+    - zip -rv9 "Lineage-17.1-kernel.zip" *
+  telegram_script:
+    - curl -F document=@"~/kernel/zip//K/Upload/Lineage-17.1-kernel.zip" https://api.telegram.org/bot$TLGTK/sendDocument?chat_id=-1001398988224
