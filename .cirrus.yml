@@ -17,7 +17,7 @@ task:
     - git clone -b lineage-17.1 --single-branch --depth="1" https://github.com/LineageOS/android_kernel_asus_sdm660
     - git clone -b pie-gsi --single-branch --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 aarch64
     - git clone -b pie-gsi --single-branch --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 arm32
-    - PATH="$HOME/kernel/aarch64/bin:$HOME/kernel/arm32/bin:${PATH}"
+    - PATH="~/kernel/aarch64/bin:~/kernel/arm32/bin:${PATH}"
     - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
     - cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
    build_script:
