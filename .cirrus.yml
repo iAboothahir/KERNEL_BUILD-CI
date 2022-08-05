@@ -33,7 +33,7 @@ task:
     - mkdir -p ~/kernel/flashable
     - cd ~/kernel/flashable
     - git clone -b master --depth="1" https://github.com/iAboothahir/AnyKernel3 zip
-    - cp -r ~/kernel/android_kernel_asus_sdm660/out/arch/arm64/boot/Image.gz-dtb ~/kernel/flashable/zip/
+    - # cp -r ~/kernel/android_kernel_asus_sdm660/out/arch/arm64/boot/Image.gz-dtb ~/kernel/flashable/zip/
     - cd zip
     - zip -rv9 "Lineage-17.1-kernel.zip" *
   telegram_script:
