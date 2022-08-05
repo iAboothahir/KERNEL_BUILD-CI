@@ -18,25 +18,19 @@ task:
     - mkdir -p ~/kernel
     - cd ~/kernel
     - git clone -b lineage-17.1 --single-branch --depth="1" https://github.com/LineageOS/android_kernel_asus_sdm660
-    - git clone -b master --single-branch --depth="1" https://github.com/radcolor/arm-linux-gnueabi.git /tmp/ci/gcc/arm
-    - git clone -b master --single-branch --depth="1" https://github.com/radcolor/aarch64-linux-gnu.git /tmp/ci/gcc/arm64
-    - git clone -b master --single-branch --depth="1" https://github.com/kdrag0n/proton-clang.git /tmp/ci/clang
+    - git clone -b pie-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 /tmp/ci/gcc/arm
+    - git clone -b pie-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 /tmp/ci/gcc/arm64
+    - git clone -b android10-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 /tmp/ci/clang
     - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
     - # cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
-    - touch ~/.kernel
-    - echo "export PATH="/tmp/ci/clang/bin:${PATH}"" >> ~/.kernel
-    - echo "export CC=clang" >> ~/.kernel
-    - echo "export ARCH=arm64" >> ~/.kernel
-    - echo "export SUBARCH=arm64" >> ~/.kernel
-    - echo "export CROSS_COMPILE=/tmp/ci/gcc/arm64/bin/aarch64-linux-gnu-" >> ~/.kernel
-    - echo "export CROSS_COMPILE_ARM32=/tmp/ci/gcc/arm/bin/arm-linux-gnueabi-" >> ~/.kernel
-    - echo "export PATH="/tmp/ci/clang/bin:${PATH}"" >> ~/.kernel
   build_script:
-    - source ~/.kernel
     - cd ~/kernel/android_kernel_asus_sdm660
+    - export ARCH=arm64
+    - export CROSS_COMPILE=/tmp/ci/gcc/arm64/bin/aarch64-linux-android-
+    - export CROSS_COMPILE_ARM32=/tmp/ci/gcc/arm/bin/arm-linux-androideabi-
+    - export PATH="/tmp/ci/clang/clang-r353983c/bin:${PATH}"
     - make O=out X00TD_defconfig
-    # - make O=out -j$(nproc --all) ARCH=arm64 CC=clang CLANG_TRIPLE=/tmp/ci/clang/bin/aarch64-linux-gnu-
-    - make -j$(nproc --all) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=/tmp/ci/gcc/arm64/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=/tmp/ci/gcc/arm/bin/arm-linux-gnueabi-
+    - make O=out -j$(nproc --all) CC=clang CLANG_TRIPLE=aarch64-linux-gnu-
   flashable_script:
     - mkdir -p ~/kernel/flashable
     - cd ~/kernel/flashable
