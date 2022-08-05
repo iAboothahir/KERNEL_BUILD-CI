@@ -21,7 +21,7 @@ task:
     - git clone -b pie-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 /tmp/ci/gcc/arm
     - git clone -b pie-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 /tmp/ci/gcc/arm64
     - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
-    - cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
+    - # cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
   build_script:
     - cd ~/kernel/android_kernel_asus_sdm660
     - export ARCH=arm64
@@ -33,7 +33,7 @@ task:
     - mkdir -p ~/kernel/flashable
     - cd ~/kernel/flashable
     - git clone -b master --depth="1" https://github.com/iAboothahir/AnyKernel3 zip
-    - # cp -r ~/kernel/android_kernel_asus_sdm660/out/arch/arm64/boot/Image.gz-dtb ~/kernel/flashable/zip/
+    - cp -r ~/kernel/android_kernel_asus_sdm660/out/arch/arm64/boot/Image.gz-dtb ~/kernel/flashable/zip/
     - cd zip
     - zip -rv9 "Lineage-17.1-kernel.zip" *
   telegram_script:
