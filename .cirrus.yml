@@ -18,7 +18,7 @@ task:
     - mkdir -p ~/kernel
     - cd ~/kernel
     - git clone -b lineage-17.1 --single-branch --depth="1" https://github.com/LineageOS/android_kernel_asus_sdm660
-    - git clone -b naster --single-branch --depth="1" https://github.com/radcolor/arm-linux-gnueabi.git /tmp/ci/gcc/arm
+    - git clone -b master --single-branch --depth="1" https://github.com/radcolor/arm-linux-gnueabi.git /tmp/ci/gcc/arm
     - git clone -b master --single-branch --depth="1" https://github.com/radcolor/aarch64-linux-gnu.git /tmp/ci/gcc/arm64
     - git clone -b master --single-branch --depth="1" https://github.com/kdrag0n/proton-clang.git /tmp/ci/clang
     - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
