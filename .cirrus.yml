@@ -29,7 +29,7 @@ task:
     - export CROSS_COMPILE=/tmp/ci/gcc/arm64/bin/aarch64-linux-android-
     - export CROSS_COMPILE_ARM32=/tmp/ci/gcc/arm/bin/arm-linux-androideabi-
     - export PATH="/tmp/ci/clang/clang-r353983c/bin:${PATH}"
-    - make O=out X00TD_defconfig
+    - make O=out X00TD-perf_defconfig
     - make O=out -j$(nproc --all) CC=clang CLANG_TRIPLE=aarch64-linux-gnu-
   flashable_script:
     - mkdir -p ~/kernel/flashable
