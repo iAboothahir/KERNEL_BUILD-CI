@@ -21,8 +21,9 @@ task:
     - git clone -b pie-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 /tmp/ci/gcc/arm
     - git clone -b pie-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 /tmp/ci/gcc/arm64
     - git clone -b android10-gsi --depth="1" https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 /tmp/ci/clang
-    - git clone https://github.com/iAboothahir/KERNEL_BUILD-CI
-    - cp -rv KERNEL_BUILD-CI/sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
+    - wget https://raw.githubusercontent.com/iAboothahir/KERNEL_BUILD-CI/main/sdm660-overlay.dtsi
+    - cp -rv sdm660-overlay.dtsi ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
+    - cat ~/kernel/android_kernel_asus_sdm660/arch/arm/boot/dts/qcom/X00TD/sdm660-overlay.dtsi
   build_script:
     - cd ~/kernel/android_kernel_asus_sdm660
     - export ARCH=arm64
